@@ -19,7 +19,7 @@ class UserRegistrationForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': "form-control py-4", 'placeholder': "Введите имя пользователя"}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': "form-control py-4", 'placeholder': "Введите имя"}))
+        'class': "form-control py-4", 'placeholder': "Введите имя", "autocomplete": "given-name"}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': "form-control py-4", 'placeholder': "Введите фамилию"}))
     email = forms.CharField(widget=forms.EmailInput(attrs={
