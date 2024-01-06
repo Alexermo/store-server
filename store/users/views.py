@@ -6,6 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.views import LoginView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from .form import UserLoginForm, UserRegistrationForm, UserProfileForm
 
@@ -13,6 +14,8 @@ from django.views.generic import CreateView, UpdateView
 
 from products.models import Basket
 from users.models import User
+
+from common.view import TitleMixin
 
 
 class UserLoginView(LoginView):
@@ -35,16 +38,17 @@ class UserLoginView(LoginView):
 #     return render(request, "users/login.html", context)
 
 
-class UserRegistrationView(CreateView):
+class UserRegistrationView(SuccessMessageMixin, CreateView):
     model = User
     template_name = "users/register.html"
     form_class = UserRegistrationForm
     success_url = reverse_lazy('users:login')
+    success_message = 'Вы успешно зарегестрированы!'
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, 'Вы успешно зарегестрированы!')
-        return response
+    # def form_valid(self, form):
+    #     response = super().form_valid(form)
+    #     messages.success(self.request, 'Вы успешно зарегестрированы!')
+    #     return response
 
 # def register(request):
 #     if request.method == "POST":
@@ -60,17 +64,17 @@ class UserRegistrationView(CreateView):
 #     return render(request, "users/register.html", context)
 
 
-class UserProfileView(UpdateView):
+class UserProfileView(TitleMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     template_name = "users/profile.html"
+    title = 'Store - Личный кабинет'
 
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data()
-        context['title'] = 'Store - Личный кабинет'
         context['baskets'] = Basket.objects.filter(user=self.object)
         return context
 
