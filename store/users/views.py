@@ -10,10 +10,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from .form import UserLoginForm, UserRegistrationForm, UserProfileForm
 
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, TemplateView
 
 from products.models import Basket
-from users.models import User
+from users.models import User, EmailVerification
 
 from common.view import TitleMixin
 
@@ -38,12 +38,13 @@ class UserLoginView(LoginView):
 #     return render(request, "users/login.html", context)
 
 
-class UserRegistrationView(SuccessMessageMixin, CreateView):
+class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
     model = User
     template_name = "users/register.html"
     form_class = UserRegistrationForm
     success_url = reverse_lazy('users:login')
     success_message = 'Вы успешно зарегестрированы!'
+    title = 'Store - Регистрация'
 
     # def form_valid(self, form):
     #     response = super().form_valid(form)
@@ -102,3 +103,20 @@ class UserProfileView(TitleMixin, UpdateView):
 # def logout(request):
 #     auth.logout(request)
 #     return HttpResponseRedirect(reverse('products:index'))
+
+
+class EmailVerificationView(TitleMixin, TemplateView):
+    title = 'Store - Подтверждение Электронной почты'
+    template_name = 'users/email_verification.html'
+
+    def get(self, request, *args, **kwargs):
+        code = kwargs['code']
+        user = User.objects.get(email=kwargs['email'])
+        email_verifications = EmailVerification.objects.filter(
+            user=user, code=code)
+        if email_verifications.exists() and not email_verifications.first().is_expired():
+            user.is_verified_email = True
+            user.save()
+            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('products:index'))

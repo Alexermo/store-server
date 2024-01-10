@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DOMAIN_NAME = 'http://localhost:8000/'
+
 
 # Application definition
 
@@ -139,4 +141,11 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Sending emails
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# Для работы с отправкой почты в консоли
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'aleksej.bushaev@yandex.ru'
+EMAIL_HOST_PASSWORD = 'twyyndbbiymlbuaz'
+EMAIL_USE_SSL = True
