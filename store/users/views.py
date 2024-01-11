@@ -1,21 +1,24 @@
-from typing import Any
-from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth, messages
-from django.urls import reverse, reverse_lazy
-
-from django.contrib.auth.decorators import login_required
-
+# from typing import Any
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
-
-from .form import UserLoginForm, UserRegistrationForm, UserProfileForm
-
-from django.views.generic import CreateView, UpdateView, TemplateView
-
-from products.models import Basket
-from users.models import User, EmailVerification
+from django.shortcuts import HttpResponseRedirect
+# from django.shortcuts import render
+# from django.contrib import auth, messages
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, TemplateView, UpdateView
 
 from common.view import TitleMixin
+# from products.models import Basket
+from users.models import EmailVerification, User
+
+from .form import UserLoginForm, UserProfileForm, UserRegistrationForm
+
+# from django.contrib.auth.decorators import login_required
+
+
+
+
+
 
 
 class UserLoginView(LoginView):
@@ -74,10 +77,10 @@ class UserProfileView(TitleMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('users:profile', args=(self.object.id,))
 
-    def get_context_data(self, **kwargs):
-        context = super(UserProfileView, self).get_context_data()
-        context['baskets'] = Basket.objects.filter(user=self.object)
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(UserProfileView, self).get_context_data()
+    #     context['baskets'] = Basket.objects.filter(user=self.object)
+    #     return context
 
     def get_object(self, queryset=None):
         return self.request.user
