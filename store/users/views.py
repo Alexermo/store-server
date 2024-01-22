@@ -16,11 +16,6 @@ from .form import UserLoginForm, UserProfileForm, UserRegistrationForm
 # from django.contrib.auth.decorators import login_required
 
 
-
-
-
-
-
 class UserLoginView(LoginView):
     template_name = "users/login.html"
     form_class = UserLoginForm

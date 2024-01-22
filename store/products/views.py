@@ -12,12 +12,9 @@ from .models import Basket, Product, ProductCategory
 # from django.core.paginator import Paginator
 
 
-
 class IndexView(TitleMixin, TemplateView):
     template_name = "products/index.html"
     title = 'Store'
-
-
 # def index(request):
 #     context = {
 #         'title': 'Store',
