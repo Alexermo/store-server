@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from .views import IndexView, ProductsListView, basket_add, basket_delete
 
@@ -6,6 +7,8 @@ app_name = 'products'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    # кэш для всей страницы
+    # path('', cache_page(15)(IndexView.as_view()), name='index'),
     path('products/', ProductsListView.as_view(), name='products'),
     path('page/<int:page>', ProductsListView.as_view(), name='paginator'),
     path('products/category/<int:category_id>/',

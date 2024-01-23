@@ -3,6 +3,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
 from django.views.generic import ListView, TemplateView
+from django.core.cache import cache
 
 from common.view import TitleMixin
 
@@ -36,6 +37,10 @@ class ProductsListView(TitleMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductsListView, self).get_context_data()
         context['categories'] = ProductCategory.objects.all()
+        context['category_id'] = self.kwargs.get('category_id')
+        # вариант кэширования
+        # context['categories'] = cache.get_or_set(
+        #     'categories', ProductCategory.objects.all(), 30)
 
         return context
 
