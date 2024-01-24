@@ -41,8 +41,15 @@ class ProductsListView(TitleMixin, ListView):
         # вариант кэширования
         # context['categories'] = cache.get_or_set(
         #     'categories', ProductCategory.objects.all(), 30)
+        # выше короткий код для кода ниже
+        # categories = cache.get('categories')
+        # if categories:
+        #     context['categories'] = categories
+        # else:
+        #     cache.set('categories', ProductCategory.objects.all(), 30)
+        #     context['categories'] = cache.get('categories')
 
-        return context
+        #         return context
 
 # def products(request, category_id=None, page_number=1):
 #     products = Product.objects.filter(

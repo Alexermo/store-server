@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'products',
     'users',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -180,13 +181,13 @@ LOGOUT_REDIRECT_URL = '/'
 # Sending emails
 
 # Для работы с отправкой почты в консоли
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'aleksej.bushaev@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'twyyndbbiymlbuaz'
-# EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'aleksej.bushaev@yandex.ru'
+EMAIL_HOST_PASSWORD = 'twyyndbbiymlbuaz'
+EMAIL_USE_SSL = True
 
 
 # OAuth
@@ -207,3 +208,9 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
+
+
+# Celery
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
