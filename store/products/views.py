@@ -48,7 +48,6 @@ class ProductsListView(TitleMixin, ListView):
         # else:
         #     cache.set('categories', ProductCategory.objects.all(), 30)
         #     context['categories'] = cache.get('categories')
-#
         return context
 
 
