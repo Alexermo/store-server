@@ -1,5 +1,6 @@
-/.idea
-/.vscode
-/Pipfile
-/Pipfile.lock
-/venv
+.idea/
+store/Pipfile
+store/Pipfile.lock
+store/env/
+.vscode/
+
