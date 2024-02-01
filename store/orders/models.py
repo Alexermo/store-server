@@ -40,4 +40,3 @@ class Order(models.Model):
                                'total_sum': float(baskets.total_sum()), }
         baskets.delete()
         self.save()
-

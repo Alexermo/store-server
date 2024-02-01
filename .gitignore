@@ -3,4 +3,5 @@ store/Pipfile
 store/Pipfile.lock
 store/env/
 .vscode/
-
+**/__pycache__/
+**/*.pyc
