@@ -10,3 +10,8 @@ __pycache__
 *.swp
 node_modules/
 dist/
+__pycache__/
+env/
+*__pycache__*
+*env*
+.idea/
