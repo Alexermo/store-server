@@ -1,4 +1,6 @@
-from collections.abc import Iterable
+
+# from collections.abc import Iterable
+
 from django.db import models
 
 from users.models import User

@@ -48,8 +48,8 @@ class ProductsListView(TitleMixin, ListView):
         # else:
         #     cache.set('categories', ProductCategory.objects.all(), 30)
         #     context['categories'] = cache.get('categories')
+        return context
 
-        #         return context
 
 # def products(request, category_id=None, page_number=1):
 #     products = Product.objects.filter(

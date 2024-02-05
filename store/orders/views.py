@@ -8,24 +8,15 @@ from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, TemplateView
 
-
 from products.models import Basket
 from orders.models import Order
 from common.view import TitleMixin
+
 
 from .forms import OrderForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-class OrderSuccessView(TitleMixin, TemplateView):
-    template_name = 'orders/success.html'
-    title = 'Store - Спасибо за заказ'
-
-
-class OrderCancelView(TitleMixin, TemplateView):
-    template_name = 'orders/cancel.html'
-    title = 'Checkout canceled'
->>>>>>> 2ab3ba1 (tune stripe webhook)
 
 
 class OrderSuccessView(TitleMixin, TemplateView):
@@ -39,10 +30,8 @@ class OrderCancelView(TitleMixin, TemplateView):
 
 
 
-class OrderCreateView(TemplateView):
+class OrderCreateView(TitleMixin, CreateView):
     template_name = 'orders/order-create.html'
-
-
     form_class = OrderForm
     success_url = reverse_lazy('orders:order_create')
     title = 'Store - Order'
@@ -103,4 +92,3 @@ def fulfill_order(session):
     order_id = int(session.metadata.order_id)
     order = Order.objects.get(id=order_id)
     order.update_after_payment()
-

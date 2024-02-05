@@ -12,7 +12,7 @@ from common.view import TitleMixin
 from users.models import EmailVerification, User
 
 from .form import UserLoginForm, UserProfileForm, UserRegistrationForm
-
+from django.contrib import auth
 # from django.contrib.auth.decorators import login_required
 
 
