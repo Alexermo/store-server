@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from typing import Any
 
 import stripe
 from django.conf import settings
@@ -8,15 +7,19 @@ from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, TemplateView
 
-from products.models import Basket
-from orders.models import Order
 from common.view import TitleMixin
-
+from orders.models import Order
+from products.models import Basket
 
 from .forms import OrderForm
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+# from typing import Any
 
+
+
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class OrderSuccessView(TitleMixin, TemplateView):
@@ -27,7 +30,6 @@ class OrderSuccessView(TitleMixin, TemplateView):
 class OrderCancelView(TitleMixin, TemplateView):
     template_name = 'orders/cancel.html'
     title = 'Checkout canceled'
-
 
 
 class OrderCreateView(TitleMixin, CreateView):
@@ -81,10 +83,7 @@ def stripe_webhook_view(request):
         )
 
     line_items = session
-    # Fulfill the purchase...
     fulfill_order(session)
-
-  # Passed signature verification
     return HttpResponse(status=200)
 
 
