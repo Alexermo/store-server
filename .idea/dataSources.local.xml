@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="PY-233.13763.11">
+    <data-source name="Django default" uuid="279be8bb-1ee2-4d1f-9929-274f8163335e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" />
+      <user-name>store_username</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

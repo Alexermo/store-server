@@ -15,14 +15,16 @@
     <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">{{ basket.product.name }}</h5>
-            <p class="card-text">{{ basket.product.discription }}</p>
+            <p class="card-text">{{ basket.product.description }}</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item bg-light">
                 <div class="row text-center">
                     <div class="col-lg-4">
-                        <input name="basketID" type="number" class="form-control"
-                               value="{{ basket.quantity }}" min="0">
+                        <label>
+                            <input name="basketID" type="number" class="form-control"
+                                   value="{{ basket.quantity }}" min="0">
+                        </label>
                     </div>
                     <div class="col-lg-4">{{ basket.sum | intcomma }}</div>
                     <div class="col-lg-4">
