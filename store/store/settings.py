@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import settings_keys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$9@fucx=+5ho405-nfk$(%_dd0cs4i(nfu4ukx9)3po6ol1h2i'
+SECRET_KEY = settings_keys.Django_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -186,8 +186,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'aleksej.bushaev@yandex.ru'
-EMAIL_HOST_PASSWORD = 'twyyndbbiymlbuaz'
+EMAIL_HOST_USER = settings_keys.Yandex_EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = settings_keys.Yandex_EMAIL_HOST_PASSWORD
 EMAIL_USE_SSL = True
 
 
@@ -218,6 +218,6 @@ CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
 # Stripe
 
-STRIPE_PUBLIC_KEY = 'pk_test_51OeEMxEff3atSBEHha9Hljptxqup7TAgAH9Fo2DWbDVlsYo9wZWHiu8pkl3N7Sf5eanY2HKTunmlihxxRyOCLEp100gTSfh7tM'
-STRIPE_SECRET_KEY = 'sk_test_51OeEMxEff3atSBEHxlFnpCK9V9pow1GtWYqff2NdLtGYXUGq9vvzx7W974fcUvmQpjRJe5kPV0GN4w7cn2Zyp9NS00MkVyfEFy'
-STRIPE_WEBHOOK_SECRET = 'whsec_6bf311bb7babe649fb00d8801843ed84516a14fb3912648e093c8f190f4503c2'
+STRIPE_PUBLIC_KEY = settings_keys.Stripe_STRIPE_PUBLIC_KEY
+STRIPE_SECRET_KEY = settings_keys.Stripe_STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET = settings_keys.Stripe_STRIPE_WEBHOOK_SECRET
