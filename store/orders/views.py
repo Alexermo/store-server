@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, DetailView, ListView, TemplateView
 
 from common.view import TitleMixin
 from orders.models import Order
@@ -14,10 +14,6 @@ from products.models import Basket
 from .forms import OrderForm
 
 # from typing import Any
-
-
-
-
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -30,6 +26,27 @@ class OrderSuccessView(TitleMixin, TemplateView):
 class OrderCancelView(TitleMixin, TemplateView):
     template_name = 'orders/cancel.html'
     title = 'Checkout canceled'
+
+
+class OrderListView(TitleMixin, ListView):
+    template_name = 'orders/orders.html'
+    title = "Store - Заказы"
+    queryset = Order.objects.all()
+    ordering = ('-created')
+
+    def get_queryset(self):
+        queryset = super(OrderListView, self).get_queryset()
+        return queryset.filter(initiator=self.request.user)
+
+
+class OrderDetailView(DetailView):
+    template_name = 'orders/order.html'
+    model = Order
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetailView, self).get_context_data(**kwargs)
+        context['title'] = f"Заказ №{self.object.id}"
+        return context
 
 
 class OrderCreateView(TitleMixin, CreateView):
