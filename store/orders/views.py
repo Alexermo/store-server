@@ -91,7 +91,7 @@ def stripe_webhook_view(request):
         # Invalid signature
         return HttpResponse(status=400)
 
-  # Handle the checkout.session.completed event
+    # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         # Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
         session = stripe.checkout.Session.retrieve(

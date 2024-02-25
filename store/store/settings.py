@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['*']
 
 DOMAIN_NAME = env('DOMAIN_NAME')
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -132,7 +131,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -151,7 +149,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -164,7 +161,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -192,7 +188,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Sending emails
 if DEBUG:
-# Для работы с отправкой почты в консоли
+    # Для работы с отправкой почты в консоли
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:
     EMAIL_HOST = env('EMAIL_HOST')
@@ -210,7 +206,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
         'SCOPE': [
@@ -219,7 +214,6 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
-
 
 # Celery
 
@@ -231,7 +225,6 @@ CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
